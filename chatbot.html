@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>React Basics</title>
+    <title>Chatbot</title>
   </head>
   <body>
     <div class="js-container"></div>
@@ -13,29 +13,31 @@
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
-    const button = <button>Hello</button>
-    const paragraph = <p>This is a Paragraph</p>
-    // so far we can only load one element a time 
-    // to load multiple we use div and put all the elements inside
-    // we will now add bracktes for code cleanup
-    // const div = (
-    //   <div>
-    //    <button>Hello</button>
-    //    <p>This is a Paragraph {2+2}</p>
-    //   </div>
-    // );
-    // practice 
-      const div = (
+        // we can replce div with <>
+      function ChatInput(){
+        return (
+            // it cannot return 2 element so use div
+            
+                <>
+                 <input placeholder="Type" size="30" />
+                 <button>Send</button>
+                </>
+            
+        );
+      }
+    //   <ChatInput></ChatInput>
+    //     <ChatInput  />
+
+      const app = (
        <div>
-        <h1>COTTON SOCKS</h1>
-        <p>Price $10</p>
-        <button>Buy</button>
+        
+        {ChatInput()} 
        </div>
       );
       // const button = document.createElement('button');
       // button.inerHTML = 'HELLO'
       const container = document.querySelector('.js-container');
-      ReactDOM.createRoot(container).render(div);
+      ReactDOM.createRoot(container).render(app);
     </script>
   </body>
 </html>

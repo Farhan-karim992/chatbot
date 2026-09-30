@@ -60,14 +60,45 @@
      // prop makes our element reuseable
      // component is better way to make app
      function App(){
-      return (
-        <>
+      const chatMessages = [{
+        message : 'Hello Chatbot', 
+        sender : 'user',
+        key : 'id1'
+      }, {
+        message : 'HELLO! How can i help you.', 
+        sender : 'robot',
+        key : 'id2'
+      },
+    {
+      message : 'Can you get me todays date?',
+      sender : 'user',
+      key : 'id3'
+    },
+  {
+    message : 'Today is 27 September',
+    sender : 'robot',
+    key : 'id4'
+  }]
+  // we have just used array and array have a property called map
+  // arrow function
+    
+        return (
+          <>
+          
+          <ChatInput 
         
-        {ChatInput()} 
-        <ChatMessage message="Hello Chatbot" sender="user" />
-        <ChatMessage message="HELLO! How can i help you." sender="robot" />
-        <ChatMessage message="Can you get me todays date?" sender="user" />
-        <ChatMessage message="Today is 27 September" sender="robot" />
+          />
+                {chatMessages.map((chatMessage) => {
+            return (
+              <ChatMessage 
+              message = {chatMessage.message}
+              sender = {chatMessage.sender}
+              key = {chatMessage.key}
+              />
+            );
+
+          })}
+          
        </>
       );
      }

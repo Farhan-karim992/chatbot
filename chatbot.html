@@ -15,14 +15,32 @@
     <script type="text/babel">
         // we can replce div with <>
         // we use div for formating purpose
-        // now we use prop it helps resue things
+        // now we use prop it helps resue things 
       function ChatInput(){
+        // to save text we use state
+        const [inputText, setInputText]=React.useState('');
+        function saveInputText(event){
+          setInputText(event.target.value);
+      
+        }
+        function sendMessage(){
+          setChatMessages([
+              ...chatMessages,
+              {
+                message : 'test',
+                sender: 'user',
+                id : crypto.randomUUID
+              }
+            ]);
+
+        }
         return (
             // it cannot return 2 element so use div
             
                 <>
-                 <input placeholder="Type" size="30" />
-                 <button>Send</button>
+                 <input placeholder="Type" size="30" onChange={saveInputText} />
+                 <button
+                 onClick={sendMessage }>Send</button>
                 </>
             
         );
@@ -55,30 +73,98 @@
                 </div>
         );
       };
+    function ChatMessages() {
+      // new topic state 
+      const array = React.useState([{
+       
+                message : 'Hello Chatbot', 
+                sender : 'user',
+                key : 'id1'
+              }, {
+                message : 'HELLO! How can i help you.', 
+                sender : 'robot',
+                key : 'id2'
+              },
+            {
+              message : 'Can you get me todays date?',
+              sender : 'user',
+              key : 'id3'
+            },
+          {
+            message : 'Today is 27 September',
+            sender : 'robot',
+            key : 'id4'
+          }]);
+      // shortcut for the above code
+      // const [chatMessages, setChatMessages] = React.useState([{}])
+      // THESE ARE CALLED ARRAY DESTRUCTURING
+          // these are called update function
+      // const [chatMessages, setChatMessages] = array; 
+      // shortcut for below code
+      const chatMessages = array[0];
+      const setChatMessages = array[1];
+      // old bad code
+        // const chatMessages = [{
+        //         message : 'Hello Chatbot', 
+        //         sender : 'user',
+        //         key : 'id1'
+        //       }, {
+        //         message : 'HELLO! How can i help you.', 
+        //         sender : 'robot',
+        //         key : 'id2'
+        //       },
+        //     {
+        //       message : 'Can you get me todays date?',
+        //       sender : 'user',
+        //       key : 'id3'
+        //     },
+        //   {
+        //     message : 'Today is 27 September',
+        //     sender : 'robot',
+        //     key : 'id4'
+        //   }]
+          // Event and Event Handlers
+          // function SendMessage(){
+          //   // console.log('Send Message');
+          //   // chatMessages.push({
+          //   //   message: 'test',
+          //   //   sender : 'user',
+          //   //   id : crypto.randomUUID()
+          //   // });
+          //   // console.log(chatMessages);
+          //   // ... is a spread opearoter
+          //   setChatMessages([
+          //     ...chatMessages,
+          //     {
+          //       message : 'test',
+          //       sender: 'user',
+          //       id : crypto.randomUUID
+          //     }
+          //   ]);
+
+          // }
+          return (
+            <>
+             
+              {chatMessages.map((chatMessage) => {
+                return (
+                  <ChatMessage 
+                  message = {chatMessage.message}
+                  sender = {chatMessage.sender}
+                  key = {chatMessage.id}
+                  />
+                );
+
+              })}
+           </>
+        );
+    }
     //   <ChatInput></ChatInput>
     //     <ChatInput  />
      // prop makes our element reuseable
      // component is better way to make app
      function App(){
-      const chatMessages = [{
-        message : 'Hello Chatbot', 
-        sender : 'user',
-        key : 'id1'
-      }, {
-        message : 'HELLO! How can i help you.', 
-        sender : 'robot',
-        key : 'id2'
-      },
-    {
-      message : 'Can you get me todays date?',
-      sender : 'user',
-      key : 'id3'
-    },
-  {
-    message : 'Today is 27 September',
-    sender : 'robot',
-    key : 'id4'
-  }]
+      
   // we have just used array and array have a property called map
   // arrow function
     
@@ -86,18 +172,10 @@
           <>
           
           <ChatInput 
-        
+          
           />
-                {chatMessages.map((chatMessage) => {
-            return (
-              <ChatMessage 
-              message = {chatMessage.message}
-              sender = {chatMessage.sender}
-              key = {chatMessage.key}
-              />
-            );
-
-          })}
+          <ChatMessages />
+               
           
        </>
       );
